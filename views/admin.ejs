@@ -1,0 +1,58 @@
+<!-- admin.ejs -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin Panel</title>
+  </head>
+  <body>
+    <h1>Admin Panel</h1>
+
+    <form action="/admin/export<% if (typeof search !== 'undefined') { %> ?search=<%= search %><% } %>" method="GET">
+        <button type="submit">Export to Excel</button>
+      </form>
+      
+      
+
+    <h3>Emails:</h3>
+
+    <% if (users && users.length > 0) { %>
+    <table>
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Created At</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach((user) => { %>
+        <tr>
+          <td><%= user.email %></td>
+          <td><%= user.createdAt.toDateString() %></td>
+          <td>
+            <a href="/admin/delete/<%= user.id %>">Delete</a>
+          </td>
+        </tr>
+        <% }); %>
+      </tbody>
+    </table>
+    <% } else { %>
+    <p>No emails found.</p>
+    <% } %>
+
+    <br>
+
+    <h3>Search Emails:</h3>
+
+    <form action="/admin/search" method="get">
+      <input type="text" name="search" placeholder="Enter email">
+      <button type="submit">Search</button>
+    </form>
+
+    <% if (typeof search !== 'undefined' && search) { %>
+        <p>Search results for: <%= search %></p>
+      <% } else { %>
+        <h1>No emails found</h1>
+      <% } %>
+  </body>
+</html>
