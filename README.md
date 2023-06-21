@@ -1,6 +1,8 @@
-homepage /
-admin /admin
-login /admin/login
+homepage: /
+<br>
+admin: /admin
+<br>
+login: /admin/login
 
 **Case Study: Newsletter Subscription and Admin Panel**
 
