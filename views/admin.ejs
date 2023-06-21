@@ -3,50 +3,25 @@
 <html>
   <head>
     <title>Admin Panel</title>
+    <link rel="stylesheet" href="/css/output.css">
   </head>
   <body>
-    <h1>Admin Panel</h1>
+    <div class="max-w-7xl m-auto">
 
-    <form action="/admin/export<% if (typeof search !== 'undefined') { %> ?search=<%= search %><% } %>" method="GET">
-        <button type="submit">Export to Excel</button>
-      </form>
-      
-      
+    
+    <h1 class="text-4xl font-bold py-3">Admin Panel</h1>
+    <span class="badge bg-slate-800"><a href="/admin/logout">Logout</a></span>
+    <span class="badge bg-slate-800"><a href="/">Home</a></span>
 
-    <h3>Emails:</h3>
 
-    <% if (users && users.length > 0) { %>
-    <table>
-      <thead>
-        <tr>
-          <th>Email</th>
-          <th>Created At</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% users.forEach((user) => { %>
-        <tr>
-          <td><%= user.email %></td>
-          <td><%= user.createdAt.toDateString() %></td>
-          <td>
-            <a href="/admin/delete/<%= user.id %>">Delete</a>
-          </td>
-        </tr>
-        <% }); %>
-      </tbody>
-    </table>
-    <% } else { %>
-    <p>No emails found.</p>
-    <% } %>
+    <div class="flex  py-5 justify-between ">
 
-    <br>
+<div class="flex flex-col gap-3">
+  <h3 class="text-base">Search Emails:</h3>
 
-    <h3>Search Emails:</h3>
-
-    <form action="/admin/search" method="get">
-      <input type="text" name="search" placeholder="Enter email">
-      <button type="submit">Search</button>
+    <form action="/admin/search" method="get" class="flex gap-3">
+      <input  class="input input-bordered w-full max-w-xs" type="text" name="search" placeholder="Enter email">
+      <button class="btn bg-cyan-800" type="submit">Search</button>
     </form>
 
     <% if (typeof search !== 'undefined' && search) { %>
@@ -54,5 +29,57 @@
       <% } else { %>
         <h1>No emails found</h1>
       <% } %>
+</div>
+
+    
+    <div>
+      <form action="/admin/export<% if (typeof search !== 'undefined') { %> ?search=<%= search %><% } %>" method="GET">
+        <button class="badge bg-purple-900 md:btn md:bg-purple-900" type="submit">Export to Excel</button>
+      </form>
+    </div>
+  </div>
+
+   
+      
+      
+
+    
+    <div class="overflow-x-auto">
+      <table class="table">
+        <!-- head -->
+        <thead>
+          <tr>
+            
+            <th>Email</th>
+            <th>Date</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+
+    <% if (users && users.length > 0) { %>
+    
+      <% users.forEach((user) => { %>
+      <tbody>
+        
+        <tr>
+          
+          <td><%= user.email %></td>
+          <td><%= user.createdAt.toDateString() %></td>
+          <td><span class="badge bg-gray-900"><a href="/admin/delete/<%= user.id %>">Delete</a></span></td>
+          
+        </tr>
+      </tbody>
+      <% }); %>
+    </table>
+    </div>
+    <% } else { %>
+    <p>No emails found.</p>
+    <% } %>
+
+    <br>
+
+    
   </body>
+</div>
 </html>

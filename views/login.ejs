@@ -1,15 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/css/output.css">
 </head>
+
 <body>
-    <form action="/admin/login" method="POST">
-        <input type="email" name="email" placeholder="email" required><br>
-        <input type="password" name="password" placeholder="Password" required><br>
-        <button type="submit">Login</button>
-      </form>
+    <div class="hero min-h-screen bg-base-200">
+        <div class="hero-content flex-col lg:flex-row-reverse">
+            <div class="text-center lg:text-left">
+                <h1 class="text-5xl font-bold">Login now!</h1>
+                <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
+                    exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+            </div>
+            <div class="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                <div class="card-body">
+                    <div class="form-control">
+                        <form action="/admin/login" method="POST"  class="flex flex-col gap-3">
+                            <input type="email" name="email" placeholder="email" required class="input input-bordered">
+                            <input type="password" name="password" placeholder="password" required class="input input-bordered">
+                            <button type="submit" class="btn">Login</button>
+                        </form>
+                        <span class="text-xs text-gray-700"><a href="/admin/signup">Signup</a></span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+
+</html>
 </body>
 </html>

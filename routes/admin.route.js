@@ -24,6 +24,17 @@ router.get('/login', unauthenticateSession, (req, res) => {
 router.post('/signup', signup);
 router.post('/login', login);
 
+// logout
+router.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.redirect('/admin');
+        }
+        res.clearCookie('sid');
+        res.redirect('/admin/login');
+    });
+});
+
 
 
 router.get('/delete/:id', authenticateSession, deleteEmail);

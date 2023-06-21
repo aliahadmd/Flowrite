@@ -20,7 +20,7 @@ const signup = asyncHandler(async (req, res) => {
     });
 
     admin.save();
-    res.redirect(`/?message=${message}`);
+    res.redirect(`/admin/login`);
 }
 });
 
