@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler';
 import Admin from '../models/admin.model.js';
 import User from '../models/users.model.js';
 import ExcelJS from 'exceljs';
+import { Op } from "sequelize";
 
 
 const signup = asyncHandler(async (req, res) => {
@@ -32,12 +33,11 @@ const login = asyncHandler(async (req, res) => {
     //find the admin by email
     const admin = await Admin.findOne({ where: { email } });
 
-    if(!Admin){
-        const message = "Email does not exist";
-        res.redirect(`/?message=${message}`);
-    } else{
-        req.session.adminId = admin.id;
-        res.redirect('/admin');
+    if (!admin) {
+      res.redirect(`/admin/login?message=Email does not exist`);
+    } else {
+      req.session.adminId = admin.id;
+      res.redirect("/admin");
     }
 })
 
@@ -52,10 +52,22 @@ const displayEmails = asyncHandler(async (req, res) => {
     res.redirect('/admin');
   });
   
+  // const searchEmails = asyncHandler(async (req, res) => {
+  //   const { search } = req.query;
+  //   const users = await User.findAll({ where: { email: search } });
+  //   res.render('admin', { users, search }); // Pass the search variable
+  // });
+
   const searchEmails = asyncHandler(async (req, res) => {
     const { search } = req.query;
-    const users = await User.findAll({ where: { email: search } });
-    res.render('admin', { users, search }); // Pass the search variable
+    const users = await User.findAll({
+      where: {
+        email: {
+          [Op.like]: `%${search}%`, // Use the like operator with % wildcards
+        },
+      },
+    });
+    res.render("admin", { users, search }); // Pass the search variable
   });
 
   const exportToExcel = asyncHandler(async (req, res) => {

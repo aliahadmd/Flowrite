@@ -17,8 +17,8 @@ router.get('/signup', unauthenticateSession, (req, res) => {
     res.render('signup');
 });
 router.get('/login', unauthenticateSession, (req, res) => {
-   
-    res.render('login');
+   const message = req.query.message;
+    res.render('login', {message});
 });
 
 router.post('/signup', signup);
