@@ -35,7 +35,7 @@ try {
     // database configuration
     sequelize.sync()
     console.log('Database connection has been established successfully.');
-    app.listen(4001, () => console.log('Server running on port 4001'));
+    app.listen(8090, () => console.log('Server running on port 4001'));
   } catch (error) {
     console.error('Unable to connect to the database:', error);
   }
