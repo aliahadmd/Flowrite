@@ -30,11 +30,13 @@ app.use(express.static("public"));
 app.use("/", homeRoute);
 app.use("/admin", adminRoute);
 
+const PORT=process.env.PORT
+
 try {
   // database configuration
   sequelize.sync();
   console.log("Database connection has been established successfully.");
-  app.listen(8090, () => console.log("Server running on port 8090"));
+  app.listen(PORT || 8003, () => console.log(`Server running on port http://localhost:${PORT}`));
 } catch (error) {
   console.error("Unable to connect to the database:", error);
 }
