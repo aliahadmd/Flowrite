@@ -1,16 +1,10 @@
-// Import Sequelize
+// config/data.config.js
 import { Sequelize } from "sequelize";
 
-// Create a Sequelize instance with PostgreSQL
-const sequelize = new Sequelize(
-  process.env.DB_NAME, // Database name
-  process.env.DB_USER, // Database user
-  process.env.DB_PASSWORD, // Database password
-  {
-    host: process.env.DB_HOST, // Hostname of the PostgreSQL service in Docker Compose
-    dialect: "postgres", // Specify PostgreSQL as the dialect
-    port: 5432, // Default PostgreSQL port
-  }
-);
+const sequelize = new Sequelize({
+  dialect: "sqlite",
+  storage: process.env.DB_STORAGE || './database.sqlite', // Use a SQLite file for the database
+});
 
 export default sequelize;
+
